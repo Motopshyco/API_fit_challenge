@@ -1,10 +1,3 @@
-import io.restassured.RestAssured;
-import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.filter.log.ErrorLoggingFilter;
-import io.restassured.filter.log.RequestLoggingFilter;
-import io.restassured.filter.log.ResponseLoggingFilter;
-import io.restassured.http.ContentType;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -14,14 +7,7 @@ import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInC
 import static org.hamcrest.Matchers.*;
 
 
-public class ApiTest {
-    @BeforeAll
-    public static void requestHelper(){
-        RestAssured.baseURI = "https://restcountries.com";
-        RestAssured.basePath = "/v3.1/alpha/";
-        RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter(), new ErrorLoggingFilter());
-        RestAssured.requestSpecification = new RequestSpecBuilder().setContentType(ContentType.JSON).build();
-    }
+public class ApiTest extends BaseTest {
 
     @Test
     public void validateSuccessfulResponse(){
